@@ -35,8 +35,18 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const MainView());
       case Routes.storeDetailsRoute:
         return MaterialPageRoute(builder: (_) => const StoreDetailsView());
-    }
 
-    return MaterialPageRoute(builder: (_) => const SplashView());
+      default:
+        return unDefinedRoute();
+    }
+  }
+
+  Route unDefinedRoute() {
+    return MaterialPageRoute(
+        builder: (_) => Scaffold(
+              appBar: AppBar(
+                title: const Text('No Route Found'),
+              ),
+            ));
   }
 }
