@@ -46,5 +46,24 @@ ThemeData getApplicationTheme() {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppSize.s12))),
     ),
+
+    // text theme
+    textTheme: TextTheme(
+        displayLarge: getSemiBoldStyle(
+            color: ColorManager.darkGrey, fontSize: FontSize.s16),
+        headlineLarge: getSemiBoldStyle(
+            color: ColorManager.darkGrey, fontSize: FontSize.s16),
+        headlineMedium: getRegularStyle(
+            color: ColorManager.darkGrey, fontSize: FontSize.s14),
+        titleMedium:
+            getMediumStyle(color: ColorManager.primary, fontSize: FontSize.s16),
+        titleSmall:
+            getRegularStyle(color: ColorManager.white, fontSize: FontSize.s16),
+        bodyLarge: getRegularStyle(color: ColorManager.grey1),
+        bodySmall: getRegularStyle(color: ColorManager.grey),
+        bodyMedium:
+            getRegularStyle(color: ColorManager.grey2, fontSize: FontSize.s12),
+        labelSmall:
+            getBoldStyle(color: ColorManager.primary, fontSize: FontSize.s12)),
   );
 }
