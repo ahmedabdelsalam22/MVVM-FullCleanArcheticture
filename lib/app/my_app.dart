@@ -20,5 +20,6 @@ class _MyAppState extends State<MyApp> {
       theme: getApplicationTheme(),
       home: Container(),
     );
+    return const Scaffold();
   }
 }
