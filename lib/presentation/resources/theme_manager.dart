@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced/presentation/resources/styles_manager.dart';
 import 'package:flutter_advanced/presentation/resources/values_manager.dart';
 
 import 'color_manager.dart';
+import 'font_manager.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(
@@ -15,8 +17,17 @@ ThemeData getApplicationTheme() {
     // ripple effect color
     // cardView theme
     cardTheme: CardTheme(
-        color: ColorManager.white,
-        shadowColor: ColorManager.grey,
-        elevation: AppSize.s4),
+      color: ColorManager.white,
+      shadowColor: ColorManager.grey,
+      elevation: AppSize.s4,
+    ),
+    // appBar theme
+    appBarTheme: AppBarTheme(
+        centerTitle: true,
+        color: ColorManager.primary,
+        elevation: AppSize.s4,
+        shadowColor: ColorManager.lightPrimary,
+        titleTextStyle:
+            getRegularStyle(fontSize: FontSize.s16, color: ColorManager.white)),
   );
 }
