@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_advanced/presentation/resources/color_manager.dart';
 
 import '../resources/assets_manager.dart';
 import '../resources/strings_manager.dart';
@@ -11,6 +13,8 @@ class OnBoardingView extends StatefulWidget {
 }
 
 class _OnBoardingViewState extends State<OnBoardingView> {
+  final PageController _pageController = PageController();
+
   late final List<SliderObject> _list = _getSliderData();
 
   static List<SliderObject> _getSliderData() {
@@ -28,7 +32,22 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      backgroundColor: ColorManager.white,
+      appBar: AppBar(
+        backgroundColor: ColorManager.white,
+        elevation: 0.0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: ColorManager.white,
+            statusBarIconBrightness: Brightness.dark),
+      ),
+      body: PageView.builder(
+        controller: _pageController,
+        itemBuilder: (context, index) {
+          return SizedBox();
+        },
+      ),
+    );
   }
 }
 
