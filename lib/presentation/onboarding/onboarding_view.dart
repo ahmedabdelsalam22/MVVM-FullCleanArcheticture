@@ -14,6 +14,7 @@ class OnBoardingView extends StatefulWidget {
 
 class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController _pageController = PageController();
+  int _currentIndex = 0;
 
   late final List<SliderObject> _list = _getSliderData();
 
@@ -43,6 +44,12 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       ),
       body: PageView.builder(
         controller: _pageController,
+        itemCount: _list.length,
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
         itemBuilder: (context, index) {
           return SizedBox();
         },
