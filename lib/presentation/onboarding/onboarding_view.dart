@@ -13,3 +13,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     return const Scaffold();
   }
 }
+
+class SliderObject {
+  String title, subTitle, image;
+
+  SliderObject(this.title, this.subTitle, this.image);
+}
