@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced/presentation/resources/color_manager.dart';
 
+import '../resources/assets_manager.dart';
+
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
 
@@ -15,7 +17,7 @@ class _SplashViewState extends State<SplashView> {
       backgroundColor: ColorManager.primary,
       body: const Center(
         child: Image(
-          image: AssetImage('assets/images/splash_logo.png'),
+          image: AssetImage(ImageAssets.splashLogo),
         ),
       ),
     );
