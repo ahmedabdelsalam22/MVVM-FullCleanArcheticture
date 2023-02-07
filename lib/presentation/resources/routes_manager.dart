@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced/presentation/forgot_password/forgot_password_view.dart';
 import 'package:flutter_advanced/presentation/login/login_view.dart';
@@ -20,7 +19,7 @@ class Routes {
 }
 
 class RouteGenerator {
-  Route getRoute(RouteSettings settings) {
+  static Route getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashView());
@@ -42,7 +41,7 @@ class RouteGenerator {
     }
   }
 
-  Route unDefinedRoute() {
+  static Route unDefinedRoute() {
     return MaterialPageRoute(
         builder: (_) => Scaffold(
               appBar: AppBar(
