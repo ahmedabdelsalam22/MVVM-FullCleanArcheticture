@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced/presentation/resources/color_manager.dart';
 
 import '../resources/assets_manager.dart';
+import '../resources/constants_manager.dart';
 import '../resources/routes_manager.dart';
 
 class SplashView extends StatefulWidget {
@@ -17,7 +18,7 @@ class _SplashViewState extends State<SplashView> {
   Timer? _timer;
 
   _startDelay() {
-    _timer = Timer(const Duration(seconds: 2), _goNext);
+    _timer = Timer(const Duration(seconds: AppConstance.splashDelay), _goNext);
   }
 
   _goNext() {
