@@ -78,6 +78,54 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       ),
     );
   }
+
+  Widget _getBottomSheetWidget() {
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            child: SizedBox(
+              width: AppSize.s20,
+              height: AppSize.s20,
+              child: SvgPicture.asset(ImageAssets.leftArrowIc),
+            ),
+          ),
+        ),
+
+        // circle indicator
+
+        // right arrow
+        Row(
+          children: [
+            for (int i = 0; i < _list.length; i++)
+              Padding(
+                padding: const EdgeInsets.all(AppPadding.p8),
+                child: _getProperCircle(i),
+              )
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            child: SizedBox(
+              width: AppSize.s20,
+              height: AppSize.s20,
+              child: SvgPicture.asset(ImageAssets.rightarrowIc),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _getProperCircle(int index) {
+    if (index == _currentIndex) {
+      return SvgPicture.asset(ImageAssets.hollowCircleIc);
+    } else {
+      return SvgPicture.asset(ImageAssets.solidCircleIc);
+    }
+  }
 }
 
 class SliderObject {
