@@ -53,7 +53,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           });
         },
         itemBuilder: (context, index) {
-          return SizedBox();
+          return OnBoardingPage(_list[index]);
         },
       ),
     );
