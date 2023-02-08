@@ -65,12 +65,12 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   AppStrings.skip,
                   textAlign: TextAlign.end,
                 ),
               ),
-            )
+            ),
 
             // widgets indicator and arrows
           ],
