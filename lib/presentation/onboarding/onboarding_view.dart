@@ -120,7 +120,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           padding: const EdgeInsets.all(AppPadding.p14),
           child: GestureDetector(
             onTap: () {
-              /// go to previous slide
+              // go to next slide
+              _pageController.animateToPage(_getNextIndex(),
+                  duration: const Duration(
+                      milliseconds: AppConstants.sliderAnimationTime),
+                  curve: Curves.bounceInOut);
             },
             child: SizedBox(
               width: AppSize.s20,
@@ -139,6 +143,14 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       previousIndex = _list.length - 1;
     }
     return previousIndex;
+  }
+
+  int _getNextIndex() {
+    int nextIndex = _currentIndex++;
+    if (nextIndex == _list.length) {
+      nextIndex = 0;
+    }
+    return nextIndex;
   }
 
   Widget _getProperCircle(int index) {
