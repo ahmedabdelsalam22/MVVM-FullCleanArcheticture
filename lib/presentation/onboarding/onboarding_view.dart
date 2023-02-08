@@ -41,7 +41,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       backgroundColor: ColorManager.white,
       appBar: AppBar(
         backgroundColor: ColorManager.white,
-        elevation: 0.0,
+        elevation: AppSize.s0,
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: ColorManager.white,
             statusBarIconBrightness: Brightness.dark),
@@ -60,8 +60,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       ),
       bottomSheet: Container(
         color: ColorManager.white,
-        height: AppSize.s100,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Align(
               alignment: Alignment.centerRight,
@@ -69,8 +69,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, Routes.loginRoute);
                 },
-                child: const Text(
+                child: Text(
                   AppStrings.skip,
+                  style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.end,
                 ),
               ),
@@ -84,61 +85,65 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   }
 
   Widget _getBottomSheetWidget() {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(AppPadding.p14),
-          child: GestureDetector(
-            onTap: () {
-              /// go to previous slide
-              _pageController.animateToPage(_getPreviousIndex(),
-                  duration: const Duration(
-                      milliseconds: AppConstants.sliderAnimationTime),
-                  curve: Curves.bounceInOut);
-            },
-            child: SizedBox(
-              width: AppSize.s20,
-              height: AppSize.s20,
-              child: SvgPicture.asset(ImageAssets.leftArrowIc),
+    return Container(
+      color: ColorManager.primary,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.p14),
+            child: GestureDetector(
+              onTap: () {
+                /// go to previous slide
+                _pageController.animateToPage(_getPreviousIndex(),
+                    duration: const Duration(
+                        milliseconds: AppConstants.sliderAnimationTime),
+                    curve: Curves.bounceInOut);
+              },
+              child: SizedBox(
+                width: AppSize.s20,
+                height: AppSize.s20,
+                child: SvgPicture.asset(ImageAssets.leftArrowIc),
+              ),
             ),
           ),
-        ),
 
-        // circle indicator
+          // circle indicator
 
-        // right arrow
-        Row(
-          children: [
-            for (int i = 0; i < _list.length; i++)
-              Padding(
-                padding: const EdgeInsets.all(AppPadding.p8),
-                child: _getProperCircle(i),
-              )
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.all(AppPadding.p14),
-          child: GestureDetector(
-            onTap: () {
-              // go to next slide
-              _pageController.animateToPage(_getNextIndex(),
-                  duration: const Duration(
-                      milliseconds: AppConstants.sliderAnimationTime),
-                  curve: Curves.bounceInOut);
-            },
-            child: SizedBox(
-              width: AppSize.s20,
-              height: AppSize.s20,
-              child: SvgPicture.asset(ImageAssets.rightarrowIc),
-            ),
+          // right arrow
+          Row(
+            children: [
+              for (int i = 0; i < _list.length; i++)
+                Padding(
+                  padding: const EdgeInsets.all(AppPadding.p8),
+                  child: _getProperCircle(i),
+                )
+            ],
           ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.p14),
+            child: GestureDetector(
+              onTap: () {
+                // go to next slide
+                _pageController.animateToPage(_getNextIndex(),
+                    duration: const Duration(
+                        milliseconds: AppConstants.sliderAnimationTime),
+                    curve: Curves.bounceInOut);
+              },
+              child: SizedBox(
+                width: AppSize.s20,
+                height: AppSize.s20,
+                child: SvgPicture.asset(ImageAssets.rightarrowIc),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
   int _getPreviousIndex() {
-    int previousIndex = _currentIndex--;
+    int previousIndex = --_currentIndex;
     if (previousIndex == -1) {
       previousIndex = _list.length - 1;
     }
@@ -146,7 +151,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   }
 
   int _getNextIndex() {
-    int nextIndex = _currentIndex++;
+    int nextIndex = ++_currentIndex;
     if (nextIndex == _list.length) {
       nextIndex = 0;
     }
