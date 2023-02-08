@@ -4,6 +4,8 @@ import 'package:flutter_advanced/presentation/resources/color_manager.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../resources/assets_manager.dart';
+import '../resources/constants_manager.dart';
+import '../resources/routes_manager.dart';
 import '../resources/strings_manager.dart';
 import '../resources/values_manager.dart';
 
@@ -64,14 +66,16 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                },
                 child: const Text(
                   AppStrings.skip,
                   textAlign: TextAlign.end,
                 ),
               ),
             ),
-
+            _getBottomSheetWidget(),
             // widgets indicator and arrows
           ],
         ),
@@ -85,6 +89,13 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         Padding(
           padding: const EdgeInsets.all(AppPadding.p14),
           child: GestureDetector(
+            onTap: () {
+              /// go to previous slide
+              _pageController.animateToPage(_getPreviousIndex(),
+                  duration: const Duration(
+                      milliseconds: AppConstants.sliderAnimationTime),
+                  curve: Curves.bounceInOut);
+            },
             child: SizedBox(
               width: AppSize.s20,
               height: AppSize.s20,
@@ -108,6 +119,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         Padding(
           padding: const EdgeInsets.all(AppPadding.p14),
           child: GestureDetector(
+            onTap: () {
+              /// go to previous slide
+            },
             child: SizedBox(
               width: AppSize.s20,
               height: AppSize.s20,
@@ -117,6 +131,14 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         )
       ],
     );
+  }
+
+  int _getPreviousIndex() {
+    int previousIndex = _currentIndex--;
+    if (previousIndex == -1) {
+      previousIndex = _list.length - 1;
+    }
+    return previousIndex;
   }
 
   Widget _getProperCircle(int index) {
