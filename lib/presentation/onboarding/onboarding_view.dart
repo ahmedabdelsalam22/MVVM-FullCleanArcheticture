@@ -56,6 +56,26 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           return OnBoardingPage(_list[index]);
         },
       ),
+      bottomSheet: Container(
+        color: ColorManager.white,
+        height: AppSize.s100,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  AppStrings.skip,
+                  textAlign: TextAlign.end,
+                ),
+              ),
+            )
+
+            // widgets indicator and arrows
+          ],
+        ),
+      ),
     );
   }
 }
