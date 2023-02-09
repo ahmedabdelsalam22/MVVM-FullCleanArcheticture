@@ -24,6 +24,22 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
+  _bind() {
+    _viewModel.start();
+  }
+
+  @override
+  void initState() {
+    _bind();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
