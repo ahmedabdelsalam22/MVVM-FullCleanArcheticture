@@ -11,7 +11,7 @@ class OnBoardingViewModel extends BaseViewModel
   final StreamController _streamController =
       StreamController<SliderViewObject>();
   late final List<SliderObject> _list;
-  final int _currentIndex = 0;
+  int _currentIndex = 0;
 
   void _postDataToView() {
     inputSliderViewObject.add(
@@ -43,18 +43,27 @@ class OnBoardingViewModel extends BaseViewModel
   }
 
   @override
-  void goNext() {
-    // TODO: implement goNext
+  int goNext() {
+    int nextIndex = ++_currentIndex;
+    if (nextIndex == _list.length) {
+      nextIndex = 0;
+    }
+    return nextIndex;
   }
 
   @override
-  void goPrevious() {
-    // TODO: implement goPrevious
+  int goPrevious() {
+    int previousIndex = --_currentIndex;
+    if (previousIndex == -1) {
+      previousIndex = _list.length - 1;
+    }
+    return previousIndex;
   }
 
   @override
   void onPageChanged(int index) {
-    // TODO: implement onPageChanged
+    _currentIndex = index;
+    _postDataToView();
   }
 
   @override
@@ -71,9 +80,9 @@ class OnBoardingViewModel extends BaseViewModel
 }
 
 abstract class OnBoardingViewModelInputs {
-  void goNext();
+  int goNext();
 
-  void goPrevious();
+  int goPrevious();
 
   void onPageChanged(int index);
 
