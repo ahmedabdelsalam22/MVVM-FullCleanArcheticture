@@ -9,6 +9,7 @@ import '../../resources/constants_manager.dart';
 import '../../resources/routes_manager.dart';
 import '../../resources/strings_manager.dart';
 import '../../resources/values_manager.dart';
+import '../view_model/onboarding_view_model.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({Key? key}) : super(key: key);
@@ -21,8 +22,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 
-
-  }
+  final OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,6 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       ),
     );
   }
-
 
   Widget _getProperCircle(int index) {
     if (index == _currentIndex) {
