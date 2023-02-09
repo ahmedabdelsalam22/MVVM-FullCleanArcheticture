@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_advanced/presentation/resources/color_manager.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../domain/model/slider_object.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/constants_manager.dart';
 import '../../resources/routes_manager.dart';
@@ -165,12 +166,6 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       return SvgPicture.asset(ImageAssets.solidCircleIc);
     }
   }
-}
-
-class SliderObject {
-  String title, subTitle, image;
-
-  SliderObject(this.title, this.subTitle, this.image);
 }
 
 class OnBoardingPage extends StatelessWidget {
