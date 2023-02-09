@@ -23,7 +23,7 @@ class OnBoardingViewModel extends BaseViewModel
   }
 
   @override
-  void onPageChanged() {
+  void onPageChanged(int index) {
     // TODO: implement onPageChanged
   }
 }
@@ -31,7 +31,7 @@ class OnBoardingViewModel extends BaseViewModel
 abstract class OnBoardingViewModelInputs {
   void goNext();
   void goPrevious();
-  void onPageChanged();
+  void onPageChanged(int index);
 }
 
 abstract class OnBoardingViewModelOutputs {}
