@@ -1,5 +1,11 @@
 import 'failure.dart';
 
+/*class ErrorHandler implements Exception {
+  late Failure failure;
+
+  ErrorHandler.handle(dynamic error) {}
+}*/
+
 enum DataSource {
   SUCCESS,
   NO_CONTENT,
@@ -13,7 +19,8 @@ enum DataSource {
   RECIEVE_TIMEOUT,
   SEND_TIMEOUT,
   CACHE_ERROR,
-  NO_INTERNET_CONNECTION
+  NO_INTERNET_CONNECTION,
+  DEFAULT
 }
 
 extension DataSourceExtension on DataSource {
@@ -49,6 +56,8 @@ extension DataSourceExtension on DataSource {
       case DataSource.NO_INTERNET_CONNECTION:
         return Failure(ResponseCode.NO_INTERNET_CONNECTION,
             ResponseMessage.NO_INTERNET_CONNECTION);
+      case DataSource.DEFAULT:
+        return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT);
     }
   }
 }
@@ -70,6 +79,7 @@ class ResponseCode {
   static const int CACHE_ERROR = -5; //
   static const int NO_INTERNET_CONNECTION = -6; //
   static const int UNKNOWN = -7; //
+  static const int DEFAULT = -7;
 }
 
 class ResponseMessage {
@@ -96,4 +106,5 @@ class ResponseMessage {
   static const String NO_INTERNET_CONNECTION =
       "Please check your internet connection";
   static const String UNKNOWN = "Some thing went wrong, Try again later";
+  static const String DEFAULT = "Some thing went wrong, Try again later";
 }
