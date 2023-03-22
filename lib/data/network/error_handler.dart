@@ -1,10 +1,46 @@
+import 'package:dio/dio.dart';
+
 import 'failure.dart';
 
-/*class ErrorHandler implements Exception {
+class ErrorHandler implements Exception {
   late Failure failure;
 
-  ErrorHandler.handle(dynamic error) {}
-}*/
+  ErrorHandler.handle(dynamic error) {
+    if (error is DioError) {
+      failure = _handleError(error);
+    } else {
+      failure = DataSource.DEFAULT.getFailure();
+    }
+  }
+}
+
+Failure _handleError(DioError error) {
+  switch (error.type) {
+    case DioErrorType.connectionTimeout:
+      return DataSource.CONNECT_TIMEOUT.getFailure();
+    case DioErrorType.sendTimeout:
+      return DataSource.SEND_TIMEOUT.getFailure();
+    case DioErrorType.receiveTimeout:
+      return DataSource.RECIEVE_TIMEOUT.getFailure();
+    case DioErrorType.cancel:
+      return DataSource.CANCEL.getFailure();
+    case DioErrorType.badResponse:
+      if (error.response != null &&
+          error.response?.statusCode != null &&
+          error.response?.statusMessage != null) {
+        return Failure(error.response?.statusCode ?? 0,
+            error.response?.statusMessage ?? "");
+      } else {
+        return DataSource.DEFAULT.getFailure();
+      }
+    case DioErrorType.badCertificate:
+      return DataSource.DEFAULT.getFailure();
+    case DioErrorType.connectionError:
+      return DataSource.INTERNAL_SERVER_ERROR.getFailure();
+    case DioErrorType.unknown:
+      return DataSource.UN_KNOWN.getFailure();
+  }
+}
 
 enum DataSource {
   SUCCESS,
@@ -20,7 +56,8 @@ enum DataSource {
   SEND_TIMEOUT,
   CACHE_ERROR,
   NO_INTERNET_CONNECTION,
-  DEFAULT
+  DEFAULT,
+  UN_KNOWN,
 }
 
 extension DataSourceExtension on DataSource {
@@ -58,6 +95,8 @@ extension DataSourceExtension on DataSource {
             ResponseMessage.NO_INTERNET_CONNECTION);
       case DataSource.DEFAULT:
         return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT);
+      case DataSource.UN_KNOWN:
+        return Failure(ResponseCode.UNKNOWN, ResponseMessage.UNKNOWN);
     }
   }
 }
