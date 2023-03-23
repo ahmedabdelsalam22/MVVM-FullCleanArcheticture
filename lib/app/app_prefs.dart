@@ -9,13 +9,13 @@ class AppPreference {
 
   AppPreference(this._preferences);
 
-  Future<String?> getAppLanguage() async {
+  Future<String> getAppLanguage() async {
     String? language = _preferences.getString(PREFS_KEY_LANG);
     if (language != null && language.isNotEmpty) {
       return language;
     } else {
       // return default lang
-      LanguageType.ENGLISH.getValue();
+      return LanguageType.ENGLISH.getValue();
     }
   }
 }
