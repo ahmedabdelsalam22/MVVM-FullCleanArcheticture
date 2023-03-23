@@ -147,3 +147,8 @@ class ResponseMessage {
   static const String UNKNOWN = "Some thing went wrong, Try again later";
   static const String DEFAULT = "Some thing went wrong, Try again later";
 }
+
+class ApiInternalStatus {
+  static const int SUCCESS = 0;
+  static const int FAILURE = 1;
+}
