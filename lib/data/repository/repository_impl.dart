@@ -6,6 +6,7 @@ import 'package:flutter_advanced/data/network/request/requests.dart';
 import 'package:flutter_advanced/domain/model/models.dart';
 import 'package:flutter_advanced/domain/repository/repository.dart';
 
+import '../network/error_handler.dart';
 import '../network/network_info.dart';
 
 class RepositoryImpl implements Repository {
@@ -18,12 +19,16 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, Authentication>> login(
       LoginRequest loginRequest) async {
     if (await _networkInfo.isConnected) {
-      final response = await _remoteDataSource.login(loginRequest);
-
-      if (response.status == 0) {
-        return right(response.toDomain());
-      } else {
-        return left(Failure(409, response.message ?? "business error message"));
+      try {
+        final response = await _remoteDataSource.login(loginRequest);
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          return right(response.toDomain());
+        } else {
+          return left(Failure(ApiInternalStatus.FAILURE,
+              response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
       }
     } else {
       return left(Failure(501, "No internet connection"));
