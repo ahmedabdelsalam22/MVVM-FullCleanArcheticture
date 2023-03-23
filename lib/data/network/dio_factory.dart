@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../app/constants.dart';
 
@@ -12,7 +14,7 @@ class DioFactory {
   Future<Dio> getDio() async {
     Dio dio = Dio();
 
-   var timeOut = const Duration(seconds: 60);
+    var timeOut = const Duration(seconds: 60);
 
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
@@ -27,7 +29,16 @@ class DioFactory {
         receiveTimeout: timeOut,
         sendTimeout: timeOut);
 
+    /// pretty_dio_logger package
+    if (!kReleaseMode) {
+      // its debug mode so print app logs
+      dio.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+      ));
+    }
+
     return dio;
-  }
   }
 }
